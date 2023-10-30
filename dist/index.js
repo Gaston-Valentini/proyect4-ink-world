@@ -8,9 +8,10 @@ const database_1 = require("./database/database");
 const startApp = () => {
     database_1.database.initialize()
         .then(() => {
+        console.log("Connected to database");
         try {
             app_1.default.listen(3000, () => {
-                console.log("Ready");
+                console.log(`Server listening on port ${app_1.default.get("SERVER_PORT")}`);
             });
         }
         catch (error) {
