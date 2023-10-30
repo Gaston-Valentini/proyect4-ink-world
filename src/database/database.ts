@@ -5,6 +5,7 @@ import app from "../app/app"
 import { Clients1698688727173 } from "../migrations/1698688727173-clients"
 import { TattooArtists1698689882718 } from "../migrations/1698689882718-tattooArtists"
 import { Appoitments1698691037174 } from "../migrations/1698691037174-appoitments"
+import { Portfolio1698692305762 } from "../migrations/1698692305762-portfolio"
 
 export const database = new DataSource({
     type: "mysql",
@@ -16,7 +17,8 @@ export const database = new DataSource({
     migrations: [
         Clients1698688727173,
         TattooArtists1698689882718,
-        Appoitments1698691037174
+        Appoitments1698691037174,
+        Portfolio1698692305762
     ],
     entities: [],
     synchronize: false,
