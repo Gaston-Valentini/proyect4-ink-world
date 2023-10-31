@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+const authRouter_1 = __importDefault(require("../views/authRouter"));
 // Settings
 app.set("SERVER_PORT", process.env.SERVER_PORT),
     app.set("DB_HOST", process.env.DB_HOST),
@@ -15,5 +16,9 @@ app.set("SERVER_PORT", process.env.SERVER_PORT),
     app.set("DB_USERNAME", process.env.DB_USERNAME),
     app.set("DB_PASSWORD", process.env.DB_PASSWORD),
     app.set("DB_NAME", process.env.DB_NAME);
+// Middlewares
+app.use(express_1.default.json());
+// Views
+app.use("/", authRouter_1.default);
 // Export
 exports.default = app;
