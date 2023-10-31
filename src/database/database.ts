@@ -6,6 +6,7 @@ import { Clients1698688727173 } from "../migrations/1698688727173-clients"
 import { TattooArtists1698689882718 } from "../migrations/1698689882718-tattooArtists"
 import { Appoitments1698691037174 } from "../migrations/1698691037174-appoitments"
 import { Portfolio1698692305762 } from "../migrations/1698692305762-portfolio"
+import { Client } from "../entities/Client"
 
 export const database = new DataSource({
     type: "mysql",
@@ -20,7 +21,9 @@ export const database = new DataSource({
         Appoitments1698691037174,
         Portfolio1698692305762
     ],
-    entities: [],
+    entities: [
+        Client
+    ],
     synchronize: false,
     logging: false,
 })
