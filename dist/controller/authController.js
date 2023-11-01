@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update = exports.profile = exports.login = exports.register = void 0;
+exports.login = exports.register = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const app_1 = __importDefault(require("../app/app"));
@@ -99,55 +99,3 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.login = login;
-const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const client = req.token;
-        const clientFound = yield Client_1.Client.findOneBy({ id: client.id });
-        return res.status(200).json({
-            success: true,
-            client: {
-                name: clientFound === null || clientFound === void 0 ? void 0 : clientFound.name,
-                surname: clientFound === null || clientFound === void 0 ? void 0 : clientFound.surname,
-                email: clientFound === null || clientFound === void 0 ? void 0 : clientFound.email,
-                phone: clientFound === null || clientFound === void 0 ? void 0 : clientFound.phone
-            }
-        });
-    }
-    catch (error) {
-        console.error("Error:", error);
-        return res.status(500).json({
-            success: false,
-            error
-        });
-    }
-});
-exports.profile = profile;
-const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const id = req.token.id;
-        yield Client_1.Client.update({ id }, req.body);
-        const updatedClient = yield Client_1.Client.findOne({
-            where: { id },
-            select: [
-                "id",
-                "name",
-                "surname",
-                "email",
-                "phone"
-            ]
-        });
-        return res.status(200).json({
-            success: true,
-            message: "Client information updated successfully.",
-            updatedClient
-        });
-    }
-    catch (error) {
-        console.error("Error:", error);
-        return res.status(500).json({
-            success: false,
-            error
-        });
-    }
-});
-exports.update = update;
