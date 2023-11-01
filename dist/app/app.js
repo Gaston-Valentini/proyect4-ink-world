@@ -20,6 +20,6 @@ app.set("JWT_SECRET", process.env.JWT_SECRET);
 // Middlewares
 app.use(express_1.default.json());
 // Views
-app.use("/", authRouter_1.default);
+app.use("/client", authRouter_1.default);
 // Export
 exports.default = app;

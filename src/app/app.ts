@@ -20,7 +20,7 @@ app.set("JWT_SECRET", process.env.JWT_SECRET)
 app.use(express.json())
 
 // Views
-app.use("/", authRouter)
+app.use("/client", authRouter)
 
 // Export
 export default app
