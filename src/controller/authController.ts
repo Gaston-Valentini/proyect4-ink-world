@@ -6,6 +6,7 @@ import app from "../app/app"
 import { Client } from "../entities/Client"
 
 const register = async (req:Request, res:Response) => {
+    
     try {
 
         const { name, surname, email, password, phone } = req.body
@@ -47,9 +48,11 @@ const register = async (req:Request, res:Response) => {
             error
         })
     }
+
 }
 
 const login = async (req:Request, res:Response) => {
+
     try {
         
         const { email, password } = req.body
@@ -100,9 +103,8 @@ const login = async (req:Request, res:Response) => {
             error
         })
     }
+
 }
-
-
 
 export {
     register,

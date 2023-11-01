@@ -9,6 +9,8 @@ const app = (0, express_1.default)();
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const authRouter_1 = __importDefault(require("../views/authRouter"));
+const clientRouter_1 = __importDefault(require("../views/clientRouter"));
+const appoitmentsRouter_1 = __importDefault(require("../views/appoitmentsRouter"));
 // Settings
 app.set("SERVER_PORT", process.env.SERVER_PORT);
 app.set("DB_HOST", process.env.DB_HOST);
@@ -20,6 +22,8 @@ app.set("JWT_SECRET", process.env.JWT_SECRET);
 // Middlewares
 app.use(express_1.default.json());
 // Views
-app.use("/client", authRouter_1.default);
+app.use("/auth", authRouter_1.default);
+app.use("/client", clientRouter_1.default);
+app.use("/appoitments", appoitmentsRouter_1.default);
 // Export
 exports.default = app;

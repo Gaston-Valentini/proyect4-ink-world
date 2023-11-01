@@ -6,6 +6,8 @@ import dotenv from "dotenv"
 dotenv.config()
 
 import authRouter from "../views/authRouter"
+import clientRouter from "../views/clientRouter"
+import appoitmentsRouter from "../views/appoitmentsRouter"
 
 // Settings
 app.set("SERVER_PORT", process.env.SERVER_PORT)
@@ -20,7 +22,9 @@ app.set("JWT_SECRET", process.env.JWT_SECRET)
 app.use(express.json())
 
 // Views
-app.use("/client", authRouter)
+app.use("/auth", authRouter)
+app.use("/client", clientRouter)
+app.use("/appoitments", appoitmentsRouter)
 
 // Export
 export default app
