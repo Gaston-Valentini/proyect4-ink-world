@@ -7,16 +7,20 @@ const profile = async (req:Request, res:Response) => {
 
         const client = req.token
 
-        const clientFound = await Client.findOneBy({id: client.id})
+        const clientFound = await Client.findOne({
+            where: {id: client.id},
+            select: [
+                "id",
+                "name",
+                "surname",
+                "email",
+                "phone"
+            ]
+        })
 
         return res.status(200).json({
             success: true,
-            client: {
-                name: clientFound?.name,
-                surname: clientFound?.surname,
-                email: clientFound?.email,
-                phone: clientFound?.phone
-            }
+            clientFound
         })
 
     } catch (error) {

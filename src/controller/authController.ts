@@ -84,7 +84,6 @@ const login = async (req:Request, res:Response) => {
 
         return res.status(200).json({
             success: true,
-            message: "Client registered successfully",
             clientFound: {
                 name: clientFound.name,
                 surname: clientFound.surname,

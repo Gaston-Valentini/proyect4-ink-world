@@ -14,15 +14,19 @@ const Client_1 = require("../entities/Client");
 const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const client = req.token;
-        const clientFound = yield Client_1.Client.findOneBy({ id: client.id });
+        const clientFound = yield Client_1.Client.findOne({
+            where: { id: client.id },
+            select: [
+                "id",
+                "name",
+                "surname",
+                "email",
+                "phone"
+            ]
+        });
         return res.status(200).json({
             success: true,
-            client: {
-                name: clientFound === null || clientFound === void 0 ? void 0 : clientFound.name,
-                surname: clientFound === null || clientFound === void 0 ? void 0 : clientFound.surname,
-                email: clientFound === null || clientFound === void 0 ? void 0 : clientFound.email,
-                phone: clientFound === null || clientFound === void 0 ? void 0 : clientFound.phone
-            }
+            clientFound
         });
     }
     catch (error) {

@@ -80,7 +80,6 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
         return res.status(200).json({
             success: true,
-            message: "Client registered successfully",
             clientFound: {
                 name: clientFound.name,
                 surname: clientFound.surname,
