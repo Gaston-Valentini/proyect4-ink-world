@@ -6,4 +6,5 @@ const authMiddleware_1 = require("../middlewares/authMiddleware");
 const router = (0, express_1.Router)();
 router.get("/profile", authMiddleware_1.auth, clientController_1.profile);
 router.post("/update", authMiddleware_1.auth, clientController_1.update);
+router.post("/getAppoitments", authMiddleware_1.auth, clientController_1.getAppoitments);
 exports.default = router;

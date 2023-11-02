@@ -1,4 +1,5 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Appoitments } from "./Appoitments"
 
 @Entity("clients")
 export class Client extends BaseEntity{
@@ -32,5 +33,8 @@ export class Client extends BaseEntity{
 
     @Column()
     isActive!: boolean
+
+    @OneToMany(() => Appoitments, (appointment) => appointment.client)
+    appoitments!: Appoitments[];
 
 }

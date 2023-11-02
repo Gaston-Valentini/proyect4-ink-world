@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn   } from "typeorm"
+import { Client } from "./Client"
 
 @Entity("appoitments")
 export class Appoitments extends BaseEntity {
@@ -23,5 +24,9 @@ export class Appoitments extends BaseEntity {
 
     @Column()
     duration!: number
+
+    @ManyToOne(() => Client, (client) => client.appoitments)
+    @JoinColumn({ name: "clientId" })
+    client!: Client;
 
 }

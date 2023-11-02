@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import bcrypt from "bcrypt"
 import { Client } from "../entities/Client"
 
 const profile = async (req:Request, res:Response) => {
@@ -39,6 +40,11 @@ const update = async (req:Request, res:Response) => {
 
         const id = req.token.id
 
+        if (req.body.password) {
+            const hashedPassword = bcrypt.hashSync(req.body.password, 10)
+            req.body.password = hashedPassword
+        }
+
         await Client.update(
             {id},
             req.body
@@ -71,7 +77,34 @@ const update = async (req:Request, res:Response) => {
     
 }
 
+const getAppoitments = async (req:Request, res:Response) => {
+
+    try {
+
+        const id = req.token.id
+
+        const clientFound = await Client.findOne({where: {id}, relations: ["appoitments"]});
+        console.log(clientFound);
+        
+        const appointments = clientFound?.appoitments
+
+        return res.status(200).json({
+            success: true,
+            appointments
+        })
+
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+
+}
+
 export {
     profile,
-    update
+    update,
+    getAppoitments
 }
