@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.update = exports.create = void 0;
+exports.remove = exports.update = exports.create = void 0;
 const Appoitments_1 = require("../entities/Appoitments");
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -64,3 +64,32 @@ const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.update = update;
+const remove = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const clientId = req.token.id;
+        const appoitmentId = parseInt(req.params.id);
+        const appoitmentFound = yield Appoitments_1.Appoitments.findOneBy({ clientId, id: appoitmentId });
+        if (appoitmentFound) {
+            yield Appoitments_1.Appoitments.remove(appoitmentFound);
+            return res.status(200).json({
+                success: true,
+                message: "Appoitment deleted successfully.",
+                appoitmentDeleted: appoitmentFound
+            });
+        }
+        else {
+            return res.status(200).json({
+                success: true,
+                message: "You cannot delete a quote that is not yours."
+            });
+        }
+    }
+    catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        });
+    }
+});
+exports.remove = remove;

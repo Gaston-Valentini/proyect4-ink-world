@@ -70,7 +70,41 @@ const update = async (req:Request, res:Response) => {
     
 }
 
+const remove = async (req:Request, res:Response) => {
+
+    try {
+
+        const clientId = req.token.id
+        const appoitmentId = parseInt(req.params.id)
+
+        const appoitmentFound = await Appoitments.findOneBy({clientId, id: appoitmentId})
+
+        if (appoitmentFound) {
+            await Appoitments.remove(appoitmentFound)
+            return res.status(200).json({
+                success: true,
+                message: "Appoitment deleted successfully.",
+                appoitmentDeleted: appoitmentFound
+            })
+        } else {
+            return res.status(200).json({
+                success: true,
+                message: "You cannot delete a quote that is not yours."
+            })
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+    
+}
+
 export {
     create,
-    update
+    update,
+    remove
 }
