@@ -13,6 +13,7 @@ const _1698691037174_appoitments_1 = require("../migrations/1698691037174-appoit
 const _1698692305762_portfolio_1 = require("../migrations/1698692305762-portfolio");
 const Client_1 = require("../entities/Client");
 const Appoitments_1 = require("../entities/Appoitments");
+const TattooArtist_1 = require("../entities/TattooArtist");
 exports.database = new typeorm_1.DataSource({
     type: "mysql",
     host: app_1.default.get("DB_HOST"),
@@ -28,7 +29,8 @@ exports.database = new typeorm_1.DataSource({
     ],
     entities: [
         Client_1.Client,
-        Appoitments_1.Appoitments
+        Appoitments_1.Appoitments,
+        TattooArtist_1.TattooArtist
     ],
     synchronize: false,
     logging: false,

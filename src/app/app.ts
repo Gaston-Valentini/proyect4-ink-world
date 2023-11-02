@@ -8,6 +8,7 @@ dotenv.config()
 import authRouter from "../views/authRouter"
 import clientRouter from "../views/clientRouter"
 import appoitmentsRouter from "../views/appoitmentsRouter"
+import tattooArtistRoter from "../views/tattooArtistRouter"
 
 // Settings
 app.set("SERVER_PORT", process.env.SERVER_PORT)
@@ -25,6 +26,7 @@ app.use(express.json())
 app.use("/auth", authRouter)
 app.use("/client", clientRouter)
 app.use("/appoitments", appoitmentsRouter)
+app.use("/tattooArtist", tattooArtistRoter)
 
 // Export
 export default app
