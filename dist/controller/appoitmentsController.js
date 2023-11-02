@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.appoitmentsCreate = void 0;
+exports.update = exports.create = void 0;
 const Appoitments_1 = require("../entities/Appoitments");
-const appoitmentsCreate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const clientId = req.token.id;
         const { tattooArtistId, date, type, price, duration } = req.body;
@@ -37,4 +37,30 @@ const appoitmentsCreate = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
-exports.appoitmentsCreate = appoitmentsCreate;
+exports.create = create;
+const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const clientId = req.token.id;
+        const appoitmentId = parseInt(req.params.id);
+        yield Appoitments_1.Appoitments.update({
+            id: appoitmentId,
+            clientId
+        }, req.body);
+        const updatedAppoitment = yield Appoitments_1.Appoitments.findOne({
+            where: { id: appoitmentId }
+        });
+        return res.status(200).json({
+            success: true,
+            message: "Appoitment information updated successfully.",
+            updatedAppoitment
+        });
+    }
+    catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        });
+    }
+});
+exports.update = update;
