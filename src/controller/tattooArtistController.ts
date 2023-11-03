@@ -109,7 +109,55 @@ const login = async (req:Request, res:Response) => {
 
 }
 
+const getAppoitments = async (req:Request, res:Response) => {
+
+    try {
+
+        const id = req.token.id
+
+        const tattooArtistFound = await TattooArtist.findOne({where: {id}, relations: ["appoitments"]});
+        
+        const appointments = tattooArtistFound?.appoitments
+
+        return res.status(200).json({
+            success: true,
+            appointments
+        })
+
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+
+}
+
+const getAllTattooArtists = async (req:Request, res:Response) => {
+
+    try {
+
+        const tattooArtistsFound = await TattooArtist.find();
+
+        return res.status(200).json({
+            success: true,
+            tattooArtistsFound
+        })
+
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+
+}
+
 export {
     register,
-    login
+    login,
+    getAppoitments,
+    getAllTattooArtists
 }

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Appoitments = void 0;
 const typeorm_1 = require("typeorm");
 const Client_1 = require("./Client");
+const TattooArtist_1 = require("./TattooArtist");
 let Appoitments = class Appoitments extends typeorm_1.BaseEntity {
 };
 exports.Appoitments = Appoitments;
@@ -48,6 +49,11 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: "clientId" }),
     __metadata("design:type", Client_1.Client)
 ], Appoitments.prototype, "client", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => TattooArtist_1.TattooArtist, (tattooArtist) => tattooArtist.appoitments),
+    (0, typeorm_1.JoinColumn)({ name: "tattooArtistId" }),
+    __metadata("design:type", TattooArtist_1.TattooArtist)
+], Appoitments.prototype, "tattooArtist", void 0);
 exports.Appoitments = Appoitments = __decorate([
     (0, typeorm_1.Entity)("appoitments")
 ], Appoitments);

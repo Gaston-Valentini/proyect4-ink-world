@@ -7,4 +7,6 @@ const adminMiddleware_1 = require("../middlewares/adminMiddleware");
 const router = (0, express_1.Router)();
 router.post("/register", authMiddleware_1.auth, adminMiddleware_1.admin, tattooArtistController_1.register);
 router.post("/login", authMiddleware_1.auth, tattooArtistController_1.login);
+router.get("/getAppoitments", authMiddleware_1.auth, tattooArtistController_1.getAppoitments);
+router.get("/getAllTattooArtists", tattooArtistController_1.getAllTattooArtists);
 exports.default = router;

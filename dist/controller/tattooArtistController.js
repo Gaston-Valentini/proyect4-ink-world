@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.register = void 0;
+exports.getAllTattooArtists = exports.getAppoitments = exports.login = exports.register = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const app_1 = __importDefault(require("../app/app"));
@@ -101,3 +101,39 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.login = login;
+const getAppoitments = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.token.id;
+        const tattooArtistFound = yield TattooArtist_1.TattooArtist.findOne({ where: { id }, relations: ["appoitments"] });
+        const appointments = tattooArtistFound === null || tattooArtistFound === void 0 ? void 0 : tattooArtistFound.appoitments;
+        return res.status(200).json({
+            success: true,
+            appointments
+        });
+    }
+    catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        });
+    }
+});
+exports.getAppoitments = getAppoitments;
+const getAllTattooArtists = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const tattooArtistsFound = yield TattooArtist_1.TattooArtist.find();
+        return res.status(200).json({
+            success: true,
+            tattooArtistsFound
+        });
+    }
+    catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        });
+    }
+});
+exports.getAllTattooArtists = getAllTattooArtists;

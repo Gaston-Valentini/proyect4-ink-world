@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn   } from "typeorm"
 import { Client } from "./Client"
+import { TattooArtist } from "./TattooArtist"
 
 @Entity("appoitments")
 export class Appoitments extends BaseEntity {
@@ -28,5 +29,9 @@ export class Appoitments extends BaseEntity {
     @ManyToOne(() => Client, (client) => client.appoitments)
     @JoinColumn({ name: "clientId" })
     client!: Client;
+
+    @ManyToOne(() => TattooArtist, (tattooArtist) => tattooArtist.appoitments)
+    @JoinColumn({ name: "tattooArtistId" })
+    tattooArtist!: TattooArtist;
 
 }

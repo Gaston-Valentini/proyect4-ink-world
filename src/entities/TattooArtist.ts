@@ -1,4 +1,5 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Appoitments } from "./Appoitments"
 
 @Entity("tattooArtists")
 export class TattooArtist extends BaseEntity{
@@ -35,5 +36,8 @@ export class TattooArtist extends BaseEntity{
 
     @Column()
     isActive!: boolean
+
+    @OneToMany(() => Appoitments, (appointment) => appointment.tattooArtist)
+    appoitments!: Appoitments[];
 
 }

@@ -4,7 +4,7 @@ export const admin = (req:Request, res:Response, next:NextFunction) => {
 
     try {
 
-        if (req.token.role !== "admin") {
+        if (req.token.role != "admin") {
             return res.status(400).json({
                 success: true,
                 message: "Access denied."

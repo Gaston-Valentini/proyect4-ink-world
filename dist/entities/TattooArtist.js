@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TattooArtist = void 0;
 const typeorm_1 = require("typeorm");
+const Appoitments_1 = require("./Appoitments");
 let TattooArtist = class TattooArtist extends typeorm_1.BaseEntity {
 };
 exports.TattooArtist = TattooArtist;
@@ -58,6 +59,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Boolean)
 ], TattooArtist.prototype, "isActive", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Appoitments_1.Appoitments, (appointment) => appointment.tattooArtist),
+    __metadata("design:type", Array)
+], TattooArtist.prototype, "appoitments", void 0);
 exports.TattooArtist = TattooArtist = __decorate([
     (0, typeorm_1.Entity)("tattooArtists")
 ], TattooArtist);

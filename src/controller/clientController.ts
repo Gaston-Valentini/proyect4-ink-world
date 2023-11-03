@@ -103,8 +103,30 @@ const getAppoitments = async (req:Request, res:Response) => {
 
 }
 
+const getAllClients = async (req:Request, res:Response) => {
+
+    try {
+
+        const clientsFound = await Client.find();
+
+        return res.status(200).json({
+            success: true,
+            clientsFound
+        })
+
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+
+}
+
 export {
     profile,
     update,
-    getAppoitments
+    getAppoitments,
+    getAllClients
 }
