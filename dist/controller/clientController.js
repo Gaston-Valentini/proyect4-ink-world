@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllClients = exports.getAppoitments = exports.update = exports.profile = void 0;
+exports.remove = exports.getAllClients = exports.getAppoitments = exports.update = exports.profile = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const Client_1 = require("../entities/Client");
 const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -112,3 +112,21 @@ const getAllClients = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.getAllClients = getAllClients;
+const remove = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.body;
+        yield Client_1.Client.delete({ id });
+        return res.status(200).json({
+            success: true,
+            message: "Client deleted successfully"
+        });
+    }
+    catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        });
+    }
+});
+exports.remove = remove;

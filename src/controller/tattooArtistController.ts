@@ -33,7 +33,7 @@ const register = async (req:Request, res:Response) => {
 
         return res.status(200).json({
             success: true,
-            message: "Client registered successfully",
+            message: "Tattoo artist registered successfully",
             clientRegistered: {
                 nickname: tattooArtistRegistered.nickname,
                 name: tattooArtistRegistered.name,
@@ -155,9 +155,33 @@ const getAllTattooArtists = async (req:Request, res:Response) => {
 
 }
 
+const remove = async (req:Request, res:Response) => {
+
+    try {
+
+        const { id } = req.body
+
+        await TattooArtist.delete({id});
+
+        return res.status(200).json({
+            success: true,
+            message: "Tattoo artist deleted successfully"
+        })
+
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+
+}
+
 export {
     register,
     login,
     getAppoitments,
-    getAllTattooArtists
+    getAllTattooArtists,
+    remove
 }

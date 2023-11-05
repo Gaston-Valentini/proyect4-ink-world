@@ -124,9 +124,33 @@ const getAllClients = async (req:Request, res:Response) => {
 
 }
 
+const remove = async (req:Request, res:Response) => {
+
+    try {
+
+        const { id } = req.body
+
+        await Client.delete({id});
+
+        return res.status(200).json({
+            success: true,
+            message: "Client deleted successfully"
+        })
+
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+
+}
+
 export {
     profile,
     update,
     getAppoitments,
-    getAllClients
+    getAllClients,
+    remove
 }

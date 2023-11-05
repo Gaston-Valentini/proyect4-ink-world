@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllTattooArtists = exports.getAppoitments = exports.login = exports.register = void 0;
+exports.remove = exports.getAllTattooArtists = exports.getAppoitments = exports.login = exports.register = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const app_1 = __importDefault(require("../app/app"));
@@ -38,7 +38,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }).save();
         return res.status(200).json({
             success: true,
-            message: "Client registered successfully",
+            message: "Tattoo artist registered successfully",
             clientRegistered: {
                 nickname: tattooArtistRegistered.nickname,
                 name: tattooArtistRegistered.name,
@@ -137,3 +137,21 @@ const getAllTattooArtists = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.getAllTattooArtists = getAllTattooArtists;
+const remove = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.body;
+        yield TattooArtist_1.TattooArtist.delete({ id });
+        return res.status(200).json({
+            success: true,
+            message: "Tattoo artist deleted successfully"
+        });
+    }
+    catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        });
+    }
+});
+exports.remove = remove;
