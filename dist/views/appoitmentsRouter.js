@@ -7,4 +7,5 @@ const router = (0, express_1.Router)();
 router.post("/create", authMiddleware_1.auth, appoitmentsController_1.create);
 router.post("/update/:id", authMiddleware_1.auth, appoitmentsController_1.update);
 router.delete("/remove/:id", authMiddleware_1.auth, appoitmentsController_1.remove);
+router.get("/getAppoitmentDetails/:id", authMiddleware_1.auth, appoitmentsController_1.getAppoitmentDetails);
 exports.default = router;

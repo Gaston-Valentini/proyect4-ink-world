@@ -103,8 +103,32 @@ const remove = async (req:Request, res:Response) => {
     
 }
 
+const getAppoitmentDetails = async (req:Request, res:Response) => {
+
+    try {
+
+        const id = parseInt(req.params.id)
+
+        const appotment = await Appoitments.findOneBy({id})
+
+        return res.status(200).json({
+            success: true,
+            appotment
+        })
+        
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json({
+            success: false,
+            error
+        })
+    }
+    
+}
+
 export {
     create,
     update,
-    remove
+    remove,
+    getAppoitmentDetails
 }
