@@ -15,6 +15,13 @@ const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const clientId = req.token.id;
         const { tattooArtistId, date, type, price, duration } = req.body;
+        const appoitmentFound = yield Appoitments_1.Appoitments.findOne({ where: { date } });
+        if (appoitmentFound) {
+            return res.status(200).json({
+                success: true,
+                message: "Invalid date"
+            });
+        }
         const newAppoitment = yield Appoitments_1.Appoitments.create({
             clientId,
             tattooArtistId,

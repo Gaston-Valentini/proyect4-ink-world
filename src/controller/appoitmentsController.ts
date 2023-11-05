@@ -10,6 +10,15 @@ const create = async (req:Request, res:Response) => {
 
         const { tattooArtistId, date, type, price, duration } = req.body
 
+        const appoitmentFound = await Appoitments.findOne({where: {date}})
+
+        if (appoitmentFound) {
+            return res.status(200).json({
+                success: true,
+                message: "Invalid date"
+            })
+        }
+
         const newAppoitment = await Appoitments.create({
             clientId,
             tattooArtistId,
